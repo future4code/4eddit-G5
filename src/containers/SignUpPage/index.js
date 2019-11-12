@@ -5,6 +5,7 @@ import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
 import styled from "styled-components"
 import { routes } from "../Router"
+import { requestSignUp } from "../../actions/signup"
 
 const LoginWrapper = styled.form`
   width: 100%;
@@ -21,7 +22,7 @@ class SignUpPage extends Component {
     this.state = {
       email: "",
       password: "",
-      name: ""
+      username: ""
     };
   }
 
@@ -31,12 +32,19 @@ class SignUpPage extends Component {
     });
   };
 
-  autenticateLogin = () => {
-    const { email, password } = this.state;
-    const { requestLogin } = this.props;
+  signUp = () => {
+    const { email, password, username } = this.state;
+    const { requestSignUp } = this.props;
 
-    requestLogin(email, password);
-    this.setState({email: "", password: "", name: ""})
+    const data = {
+      email,
+      password,
+      username
+    };
+
+    requestSignUp(data);
+
+    this.setState({email: "", password: "", username: ""})
   } 
 
   render() {
@@ -46,7 +54,7 @@ class SignUpPage extends Component {
           <LoginWrapper>
             <TextField
               onChange={this.handleFieldChange}
-              name="name"
+              name="username"
               type="text"
               label="Your name"
               value={name}
@@ -65,7 +73,7 @@ class SignUpPage extends Component {
               label="Password"
               value={password}
             />
-            <Button onClick={this.autenticateLogin} variant='flat' color='primary'>Login</Button>
+            <Button onClick={this.signUp} variant='flat' color='primary'>Signup</Button>
             <a onClick={this.props.goToLoginPage}>Return to login page</a>
           </LoginWrapper>
     );
@@ -74,7 +82,7 @@ class SignUpPage extends Component {
 
 function mapDispatchToProps(dispatch){
   return {
-    requestLogin: (email, password) => dispatch(),
+    requestSignUp: (data) => dispatch(requestSignUp(data)),
     goToLoginPage: () => dispatch(push(routes.login))
   }
 }
