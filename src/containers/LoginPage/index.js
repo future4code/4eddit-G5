@@ -20,7 +20,7 @@ class LoginPage extends Component {
     super(props);
     this.state = {
       email: "",
-      password: ""
+      password: "",
     };
   }
 
@@ -59,6 +59,10 @@ class LoginPage extends Component {
             />
             <Button onClick={this.autenticateLogin} variant='flat' color='primary'>Login</Button>
             <p>Not a user? <a onClick={this.props.goToSignUp}>Sign up</a></p>
+          
+        <Button onClick={this.props.goFeed} variant='flat' color='primary'>Feed</Button>
+        <Button onClick={this.props.goPost} variant='flat' color='primary'>Post</Button>
+
           </LoginWrapper>
     );
   }
@@ -67,7 +71,9 @@ class LoginPage extends Component {
 function mapDispatchToProps(dispatch){
   return {
     requestLogin: (email, password) => dispatch(),
-    goToSignUp: () => dispatch(push(routes.signUp))
+    goToSignUp: () => dispatch(push(routes.signUp)),
+    goFeed: () => dispatch(push(routes.feed)),
+    goPost: () => dispatch(push(routes.post)),
   }
 }
 
