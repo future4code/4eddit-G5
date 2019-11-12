@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import { push } from "connected-react-router"
 import { routes } from "../containers/Router";
-import { connect } from "react-redux"
+import { connect } from "react-redux";
+import FeedPage from "../containers/FeedPage";
+import PostPage from "../containers/PostPage";
 
 class ProtectRouter extends Component {
 
@@ -13,7 +15,9 @@ class ProtectRouter extends Component {
                         this.props.goLogin():
                         <Route path={this.props.path} component={this.props.component} />
         return(
+            <div>
                 {Router}
+            </div>
         )
     }
 

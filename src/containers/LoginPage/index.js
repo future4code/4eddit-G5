@@ -5,6 +5,7 @@ import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
 import styled from "styled-components"
 import { routes } from "../Router"
+import { login } from "../../actions/login"
 
 const LoginWrapper = styled.form`
   width: 100%;
@@ -70,7 +71,7 @@ class LoginPage extends Component {
 
 function mapDispatchToProps(dispatch){
   return {
-    requestLogin: (email, password) => dispatch(),
+    requestLogin: (email, password) => dispatch(login(email,password)),
     goToSignUp: () => dispatch(push(routes.signUp)),
     goFeed: () => dispatch(push(routes.feed)),
     goPost: () => dispatch(push(routes.post)),
