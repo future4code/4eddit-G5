@@ -3,6 +3,9 @@ import { connect } from "react-redux"
 import CreatePost from "../../components/createPost"
 import Post from "../../components/Post";
 import { getPosts } from "../../actions/feed";
+import { push } from "connected-react-router";
+import { routes } from "../Router";
+import { getPostById } from "../../actions/detailedPost";
 
 
 
@@ -21,7 +24,7 @@ class FeedPage extends Component {
 
 
     render(){
-        const posts = this.props.posts.map(post => (<Post onClick={this.} post={post}/>))
+        const posts = this.props.posts.map(post => (<Post onClickGoToComments={() => this.props.goToPosts(post.id)} post={post}/>))
         console.log(posts)
         return (
 
@@ -40,7 +43,11 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
     return {
-        getPosts: () => dispatch(getPosts())
+        getPosts: () => dispatch(getPosts()),
+        goToPosts: (id) => {
+            dispatch(getPostById(id));
+            dispatch(push(routes.post));
+        }
     }
 }
 

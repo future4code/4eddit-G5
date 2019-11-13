@@ -2,13 +2,12 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
-import { createPost } from "../actions/feed"
+import { createComment } from "../../actions/comment"
 
-class CreatePost extends Component {
+class CreateNewComment extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: "",
             text: ""
         };
     }
@@ -19,26 +18,19 @@ class CreatePost extends Component {
         });
     };
 
-    createPost = () => {
-        const { title, text } = this.state;
-        const { createPost } = this.props;
+    createComment = () => {
+        const { text } = this.state;
+        const { createComment, id } = this.props;
 
-        createPost(title, text);
+        createComment(text, id);
         this.setState({ title: "", text: ""})
     }
 
     render() {
-        const { title, text } = this.state;
+        const { text } = this.state;
 
         return (
             <div>
-                <TextField
-                    onChange={this.handleFieldChange}
-                    name="title"
-                    type="text"
-                    label="Title"
-                    value={title}
-                />
                 <TextField
                     onChange={this.handleFieldChange}
                     name="text"
@@ -46,8 +38,7 @@ class CreatePost extends Component {
                     label="Text"
                     value={text}
                 />
-               
-                <Button onClick={this.createPost} variant='flat' color='primary'>Create</Button>
+                <Button onClick={this.createComment} variant='flat' color='primary'>Create</Button>
             </div>
         );
     }
@@ -55,8 +46,8 @@ class CreatePost extends Component {
 
 function mapDispatchToProps(dispatch) {
     return {
-        createPost: (title, text) => dispatch(createPost(title, text)),
+        createComment: (text, id) => dispatch(createComment(text, id)),
     }
 }
 
-export default connect(null, mapDispatchToProps)(CreatePost);
+export default connect(null, mapDispatchToProps)(CreateNewComment);
