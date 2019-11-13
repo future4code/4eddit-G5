@@ -9,3 +9,16 @@ export const createComment = (text, id) => async (dispatch) => {
     const res = await axios.post(`https://us-central1-missao-newton.cloudfunctions.net/fourEddit/posts/${id}/comment`, data, { headers: { auth: token } })
     dispatch(getPostById(id))
 }
+
+export const voteComment = (value, id, idComment) => async (dispatch) => {
+    console.log("tesate", value, id, idComment)
+    const token = window.localStorage.getItem("token")
+    const data = {
+        direction: value,
+    }
+    
+    const res = await axios.put(`https://us-central1-missao-newton.cloudfunctions.net/fourEddit/posts/${id}/comment/${idComment}/vote
+`, data, { headers: { auth: token } })
+    
+    dispatch(getPostById(id))
+}

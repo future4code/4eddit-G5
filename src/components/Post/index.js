@@ -3,6 +3,8 @@ import IconButton from '@material-ui/core/IconButton'
 import ThumbsUp from '../../style/thumb_up-24px.svg'
 import ThumbsDown from '../../style/thumb_down-24px.svg'
 import styled from 'styled-components'
+import { vote } from '../../actions/feed'
+import { connect } from "react-redux"
 
 const PostWrapper = styled.div`
     border: 1px solid black;
@@ -35,6 +37,28 @@ class Post extends Component{
         this.state = {}
     }
 
+    changeThumbs = (value, id)=> {
+        const {vote} = this.props
+        const userVote = this.props.post.userVoteDirection
+        
+        switch (userVote) {
+            case 0:
+                vote(value, id)
+                break;
+            case 1:
+                if (value === -1)
+                    vote(0, id)
+                break;
+            case -1:
+                if (value === 1)
+                    vote(0, id)
+                break;
+            default:
+                break;
+        }
+    }
+    
+
     render(){
         return(
             <PostWrapper>
@@ -45,11 +69,11 @@ class Post extends Component{
                 <Footer>
                     <ButtonsSection>
                         <IconButton>
-                            <img src={ThumbsUp} onClick={this.props.onClickThumbUp} />
+                            <img src={(ThumbsUp)} onClick={()=> this.changeThumbs(1, this.props.post.id)} />
                         </IconButton>
                         <p>{this.props.post.votesCount}</p>
                         <IconButton>
-                            <img src={ThumbsDown} onClick={this.props.onClickThumbDown} />
+                            <img src={ThumbsDown} onClick={() => this.changeThumbs(-1, this.props.post.id)} />
                         </IconButton>
                     </ButtonsSection>
                     <p onClick={this.props.onClickGoToComments}>{this.props.post.commentsNumber} Comments</p>
@@ -59,4 +83,10 @@ class Post extends Component{
     }
 }
 
-export default Post;
+function mapDispatchToProps(dispatch) {
+    return {
+        vote: (value, id) => dispatch(vote(value, id)),
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Post);
