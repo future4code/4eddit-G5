@@ -52,7 +52,7 @@ class Post extends Component{
                             <img src={ThumbsDown} onClick={this.props.onClickThumbDown} />
                         </IconButton>
                     </ButtonsSection>
-                    <p>{this.props.post.commentsNumber} Comments</p>
+                    <p onClick={this.props.onClickGoToComments}>{this.props.post.commentsNumber} Comments</p>
                 </Footer>
             </PostWrapper>
         )
