@@ -6,6 +6,7 @@ import ThumbsDown from '../../style/thumb_down-24px.svg'
 import styled from 'styled-components'
 import Comments from "../../components/Comments"
 import CreateNewComment from "../../components/CreateNewComment"
+import { vote } from "../../actions/feed"
 
 const PostWrapper = styled.div`
     border: 1px solid black;
@@ -40,6 +41,27 @@ class PostPage extends Component {
         this.state = {}
     }
 
+    changeThumbs = (value, id) => {
+        const { vote } = this.props
+        const userVote = this.props.post.userVoteDirection
+
+        switch (userVote) {
+            case 0:
+                vote(value, id)
+                break;
+            case 1:
+                if (value === -1)
+                    vote(0, id)
+                break;
+            case -1:
+                if (value === 1)
+                    vote(0, id)
+                break;
+            default:
+                break;
+        }
+    }
+
 
     render(){
 
@@ -52,11 +74,11 @@ class PostPage extends Component {
                 <Footer>
                     <ButtonsSection>
                         <IconButton>
-                            <img src={ThumbsUp} onClick={this.props.onClickThumbUp} />
+                            <img src={ThumbsUp} onClick={() => this.changeThumbs(1, this.props.post.id)} />
                         </IconButton>
                         <p>{this.props.post.votesCount}</p>
                         <IconButton>
-                            <img src={ThumbsDown} onClick={this.props.onClickThumbDown} />
+                            <img src={ThumbsDown} onClick={() => this.changeThumbs(-1, this.props.post.id)} />
                         </IconButton>
                     </ButtonsSection>
                     <p>{this.props.post.commentsNumber} Comments</p>
@@ -76,6 +98,7 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
     return {
+        vote: (value, id) => dispatch(vote(value, id)),
     }
 }
 
