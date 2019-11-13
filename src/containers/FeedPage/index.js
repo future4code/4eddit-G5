@@ -1,6 +1,8 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
+import CreatePost from "../../components/createPost"
 import Post from "../../components/Post";
+
 
 
 
@@ -8,7 +10,12 @@ import Post from "../../components/Post";
 const FeedPage = () => {
     
     return (
-        <Post />
+
+        <div>
+            <CreatePost/>
+        
+      </div>
+
     );
 }
 
