@@ -38,21 +38,21 @@ class Post extends Component{
     render(){
         return(
             <PostWrapper>
-                <Header>{this.props.title} - {this.props.username}</Header>
+                <Header>{this.props.post.title} - {this.props.post.username}</Header>
                 <section>
-                    <p>{this.props.text}</p>
+                    <p>{this.props.post.text}</p>
                 </section>
                 <Footer>
                     <ButtonsSection>
                         <IconButton>
                             <img src={ThumbsUp} onClick={this.props.onClickThumbUp} />
                         </IconButton>
-                        <p>{this.props.likes}</p>
+                        <p>{this.props.post.votesCount}</p>
                         <IconButton>
                             <img src={ThumbsDown} onClick={this.props.onClickThumbDown} />
                         </IconButton>
                     </ButtonsSection>
-                    <p>{this.props.comments} Comments</p>
+                    <p>{this.props.post.commentsNumber} Comments</p>
                 </Footer>
             </PostWrapper>
         )
