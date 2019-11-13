@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
+import CreatePost from "../../components/createPost"
 
 
 
@@ -7,7 +8,9 @@ import { connect } from "react-redux"
 const FeedPage = () => {
     
     return (
-        <div>aaa</div>
+        <div>
+            <CreatePost/>
+        </div>
     );
 }
 
