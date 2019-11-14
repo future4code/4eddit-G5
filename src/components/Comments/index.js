@@ -8,12 +8,17 @@ import { voteComment } from "../../actions/comment"
 
 const PostWrapper = styled.div`
     border: 1px solid black;
-    width: 50%;
+    width: 70vw;
 `
+
+const Comment = styled.p`
+  margin-left 5%;
+`;
 
 const Header = styled.header`
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    font-size: 130%;
     align-items: center;
     border-bottom: 1px solid black;
 `
@@ -21,7 +26,7 @@ const Header = styled.header`
 const Footer = styled.footer`
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-start;
     border-top: 1px solid black;
 `
 
@@ -62,7 +67,7 @@ const ButtonsSection = styled.div`
         <PostWrapper>
             <Header>{props.comments.username}</Header>
             <section>
-                <p>{props.comments.text}</p>
+                <Comment>{props.comments.text}</Comment>
             </section>
             <Footer>
                 <ButtonsSection>

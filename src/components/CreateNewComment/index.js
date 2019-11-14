@@ -3,6 +3,18 @@ import { connect } from "react-redux"
 import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
 import { createComment } from "../../actions/comment"
+import styled from 'styled-components'
+
+const MainConteiner = styled.div`
+  width: 100%;
+  gap: 10px;
+  display: grid;
+  border: 1px solid black;
+`;
+
+const TextFieldStyled = styled(TextField)`
+  margin: 0 5%;
+`;
 
 class CreateNewComment extends Component {
     constructor(props) {
@@ -30,16 +42,16 @@ class CreateNewComment extends Component {
         const { text } = this.state;
 
         return (
-            <div>
-                <TextField
+            <MainConteiner>
+                <TextFieldStyled
                     onChange={this.handleFieldChange}
                     name="text"
                     type="text"
-                    label="Text"
+                    label="Comment"
                     value={text}
                 />
                 <Button onClick={this.createComment} variant='flat' color='primary'>Create</Button>
-            </div>
+            </MainConteiner>
         );
     }
 }

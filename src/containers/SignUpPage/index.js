@@ -8,8 +8,8 @@ import { routes } from "../Router"
 import { requestSignUp } from "../../actions/signup"
 
 const LoginWrapper = styled.form`
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   gap: 10px;
   place-content: center;
   justify-items: center;

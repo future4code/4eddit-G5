@@ -5,7 +5,8 @@ import {
   MuiThemeProvider,
   createGenerateClassName,
   jssPreset,
-  CssBaseline
+  CssBaseline,
+  SnackbarContent
 } from "@material-ui/core";
 import JssProvider from "react-jss/lib/JssProvider";
 import { create } from "jss";
@@ -15,6 +16,7 @@ import { createBrowserHistory } from "history";
 import { createStore, applyMiddleware, compose } from "redux";
 import { generateReducers } from "../../reducers";
 import { routerMiddleware } from "connected-react-router";
+import SnackbarComponent from "../snackbar/index";
 
 const generateClassName = createGenerateClassName();
 const jss = create({
@@ -34,12 +36,14 @@ const middlewares = [
 
 const store = createStore(generateReducers(history), compose(...middlewares));
 
+
+
 export const App = () => (
   <Provider store={store}>
     <JssProvider jss={jss} generateClassName={generateClassName}>
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
-        <Router history={history} />
+        <SnackbarComponent/>
       </MuiThemeProvider>
     </JssProvider>
   </Provider>

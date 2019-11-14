@@ -2,6 +2,7 @@ import axios from 'axios'
 import { routes } from '../containers/Router'
 import { push } from "connected-react-router";
 import { getPostById } from './detailedPost';
+import { changeSnackbar } from './snackbar';
 
 export const createPost = (title, text) => async (dispatch) => {
     const token = window.localStorage.getItem("token")
@@ -26,8 +27,14 @@ export const vote = (value, id) => async (dispatch) => {
     const data = {
         direction: value,
     }
-    const res = await axios.put(`https://us-central1-missao-newton.cloudfunctions.net/fourEddit/posts/${id}/vote`, data, { headers: { auth: token } })
-
-    dispatch(getPosts())
-    dispatch(getPostById(id))
+    const res = await axios.put(`https://us-central1-missao-newton.cloudfunctions.net/fourEddit/posts/${id}/vote`, data, { headers: { auth: token }
+    }).then((res) => {
+        dispatch(getPosts())
+        dispatch(getPostById(id))
+        const message = "Successfully Vote"
+        dispatch(changeSnackbar(message, "success"))
+    }).catch((err) => {
+        const message = "Error when Vote"
+        dispatch(changeSnackbar(message, "error"))
+    })
 }

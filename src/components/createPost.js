@@ -3,6 +3,30 @@ import { connect } from "react-redux"
 import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
 import { createPost } from "../actions/feed"
+import styled from "styled-components"
+
+
+const MainConteiner = styled.form`
+  width: 70vw;
+  gap: 5px;
+  display: grid;
+  border: 1px solid black;
+`;
+
+const TitleNewPost = styled.p`
+  margin-left 5%;
+  font-size: 150%;
+`;
+
+const TextFieldStyled1 = styled(TextField)`
+  margin-left 5%;
+  width: 20%;
+`;
+
+const TextFieldStyled2 = styled(TextField)`
+  margin: 0 5%;
+`;
+
 
 class CreatePost extends Component {
     constructor(props) {
@@ -31,15 +55,16 @@ class CreatePost extends Component {
         const { title, text } = this.state;
 
         return (
-            <div>
-                <TextField
+            <MainConteiner>
+                <TitleNewPost>New Post:</TitleNewPost>
+                <TextFieldStyled1
                     onChange={this.handleFieldChange}
                     name="title"
                     type="text"
                     label="Title"
                     value={title}
                 />
-                <TextField
+                <TextFieldStyled2
                     onChange={this.handleFieldChange}
                     name="text"
                     type="text"
@@ -48,7 +73,7 @@ class CreatePost extends Component {
                 />
                
                 <Button onClick={this.createPost} variant='flat' color='primary'>Create</Button>
-            </div>
+            </MainConteiner>
         );
     }
 }
