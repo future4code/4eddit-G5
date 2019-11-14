@@ -32,6 +32,11 @@ const ButtonsSection = styled.div`
     align-items: center;
 `
 
+const StyledTypography = styled(Typography)`
+    text-decoration: underline;
+    :hover{cursor: pointer;};
+`
+
 class Post extends Component{
     constructor(props){
         super(props);
@@ -101,7 +106,7 @@ class Post extends Component{
                             <ThumbDown  onClick={() => this.changeThumbs(-1, this.props.post.id)} />
                         </IconButton>
                     </ButtonsSection>
-                    <Typography onClick={this.props.onClickGoToComments}>{this.props.post.commentsNumber} Comments</Typography>
+                    <StyledTypography onClick={this.props.onClickGoToComments}>{this.props.post.commentsNumber} Comments</StyledTypography>
                 </StyledCardActions>
             </StyledCard>
         )

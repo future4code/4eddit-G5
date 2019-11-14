@@ -11,6 +11,7 @@ import Header from "../../components/Header";
 
 const MainWrapper = styled.div`
   min-height: 100vh;
+  background: #758595;
 `
 
 
@@ -41,7 +42,10 @@ class FeedPage extends Component {
         const posts = this.props.posts.map(post => (<Post onClickGoToComments={() => this.props.goToPosts(post.id)} post={post}/>))
         return (
             <MainWrapper>
-                <Header logOffButton />
+                <Header
+                 logOffButton 
+                 userInfo username={window.localStorage.getItem("username")}
+                />
                 <MainConteiner>
                     <CreatePost/>
                     {posts}
@@ -52,7 +56,7 @@ class FeedPage extends Component {
 }
 
 const mapStateToProps = state => ({
-    posts: state.posts.posts
+    posts: state.posts.posts,
 })
 
 function mapDispatchToProps(dispatch) {

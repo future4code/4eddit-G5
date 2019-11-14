@@ -7,20 +7,32 @@ import styled from "styled-components"
 import { routes } from "../Router"
 import { login } from "../../actions/login"
 import Header from "../../components/Header"
+import Card from '@material-ui/core/Card'
+
 
 const MainWrapper = styled.div`
   height: 100vh;
+  background: #758595;
+`
+
+const LoginMainWrapper = styled.div`
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 
-const LoginWrapper = styled.form`
-  width: 100%;
-  height: 90%;
+const LoginWrapper = styled(Card)`
+  width: 20%;
+  height: 50%;
   gap: 10px;
   place-content: center;
   justify-items: center;
   align-items: center;
   display: grid;
+  border: 1px solid black;
 `;
 
 const SignUpLink = styled.a`
@@ -58,24 +70,26 @@ class LoginPage extends Component {
         <MainWrapper>
           <Header
           />
-          <LoginWrapper>
-            <TextField
-              onChange={this.handleFieldChange}
-              name="email"
-              type="email"
-              label="E-mail"
-              value={email}
-            />
-            <TextField
-              onChange={this.handleFieldChange}
-              name="password"
-              type="password"
-              label="Password"
-              value={password}
-            />
-            <Button onClick={this.autenticateLogin} variant='flat' color='primary'>Login</Button>
-            <p>Not a user? <SignUpLink onClick={this.props.goToSignUp}>Sign up</SignUpLink></p>
-          </LoginWrapper>
+          <LoginMainWrapper>
+            <LoginWrapper>
+              <TextField
+                onChange={this.handleFieldChange}
+                name="email"
+                type="email"
+                label="E-mail"
+                value={email}
+              />
+              <TextField
+                onChange={this.handleFieldChange}
+                name="password"
+                type="password"
+                label="Password"
+                value={password}
+              />
+              <Button onClick={this.autenticateLogin} variant='flat' color='primary'>Login</Button>
+              <p>Not a user? <SignUpLink onClick={this.props.goToSignUp}>Sign up</SignUpLink></p>
+            </LoginWrapper>
+          </LoginMainWrapper>
         </MainWrapper>
     );
   }
