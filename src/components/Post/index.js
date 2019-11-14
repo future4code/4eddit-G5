@@ -5,24 +5,25 @@ import ThumbDown from '@material-ui/icons/ThumbDown'
 import styled from 'styled-components'
 import { vote } from '../../actions/feed'
 import { connect } from "react-redux"
+import Card from '@material-ui/core/Card'
+import CardHeader from '@material-ui/core/CardHeader'
+import CardContent from '@material-ui/core/CardContent'
+import CardActions from '@material-ui/core/CardActions'
+import Divider from '@material-ui/core/Divider'
+import Typography from '@material-ui/core/Typography'
 
-const PostWrapper = styled.div`
+
+
+const StyledCard = styled(Card)`
     border: 1px solid black;
-    width: 50%;
+    width: 70%;
 `
 
-const Header = styled.header`
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    border-bottom: 1px solid black;
-`
-
-const Footer = styled.footer`
+const StyledCardActions = styled(CardActions)`
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    border-top: 1px solid black;
+    justify-content: space-between;
+    margin: 0 5% 0 0;
 `
 
 const ButtonsSection = styled.div`
@@ -83,12 +84,14 @@ class Post extends Component{
         }
 
         return(
-            <PostWrapper>
-                <Header>{this.props.post.title} - {this.props.post.username}</Header>
-                <section>
-                    <p>{this.props.post.text}</p>
-                </section>
-                <Footer>
+            <StyledCard>
+                <CardHeader title={this.props.post.title} subheader={this.props.post.username} />
+                <Divider />
+                <CardContent>
+                    <Typography>{this.props.post.text}</Typography>
+                </CardContent>
+                <Divider />
+                <StyledCardActions>
                     <ButtonsSection>
                         <IconButton color={colorbutton1}>
                             <ThumbUp  onClick={()=> this.changeThumbs(1, this.props.post.id)} />
@@ -98,9 +101,9 @@ class Post extends Component{
                             <ThumbDown  onClick={() => this.changeThumbs(-1, this.props.post.id)} />
                         </IconButton>
                     </ButtonsSection>
-                    <p onClick={this.props.onClickGoToComments}>{this.props.post.commentsNumber} Comments</p>
-                </Footer>
-            </PostWrapper>
+                    <Typography onClick={this.props.onClickGoToComments}>{this.props.post.commentsNumber} Comments</Typography>
+                </StyledCardActions>
+            </StyledCard>
         )
     }
 }

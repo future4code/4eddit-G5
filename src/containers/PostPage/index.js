@@ -1,12 +1,15 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import IconButton from '@material-ui/core/IconButton'
-import ThumbsUp from '../../style/thumb_up-24px.svg'
-import ThumbsDown from '../../style/thumb_down-24px.svg'
 import styled from 'styled-components'
 import Comments from "../../components/Comments"
 import CreateNewComment from "../../components/CreateNewComment"
 import { vote } from "../../actions/feed"
+import Post from "../../components/Post"
+import Header from "../../components/Header"
+
+const MainWrapper = styled.div`
+  min-height: 100vh;
+`
 
 const MainConteiner = styled.div`
   width: 100vw;
@@ -18,16 +21,11 @@ const MainConteiner = styled.div`
 `;
 
 const PostWrapper = styled.div`
-    border: 1px solid black;
-    width: 70vw;
-`
-
-const Header = styled.header`
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    font-size: 130%;
-    border-bottom: 1px solid black;
+    width: 100vw;
 `
 
 const Footer = styled.footer`
@@ -42,13 +40,11 @@ const ButtonsSection = styled.div`
     justify-content: flex-start;
     align-items: center;
 `
+
 const Comment = styled.p`
     margin-right: 2%;
 `;
 
-const Post = styled.p`
-    margin-left: 5%;
-`;
 
 
 
@@ -81,32 +77,20 @@ class PostPage extends Component {
 
 
     render(){
-
+        const { post } = this.props
         return (
-            <MainConteiner>
-                <PostWrapper>
-                    <Header>{this.props.post.title} - {this.props.post.username}</Header>
-                    <section>
-                        <Post>{this.props.post.text}</Post>
-                    </section>
-                    <Footer>
-                        <ButtonsSection>
-                            <IconButton>
-                                <img src={ThumbsUp} onClick={() => this.changeThumbs(1, this.props.post.id)} />
-                            </IconButton>
-                            <p>{this.props.post.votesCount}</p>
-                            <IconButton>
-                                <img src={ThumbsDown} onClick={() => this.changeThumbs(-1, this.props.post.id)} />
-                            </IconButton>
-                        </ButtonsSection>
-                        <Comment>{this.props.post.commentsNumber} Comments</Comment>             
-                    </Footer>
-                </PostWrapper>
-                <CreateNewComment id={this.props.post.id} />   
-                {this.props.post.comments.map((comment) => {
-                    return (<Comments comments={comment} />)
-                })}
-            </MainConteiner>
+            <MainWrapper>
+                <Header logOffButton goBack />
+                <MainConteiner>
+                    <PostWrapper>
+                        <Post post={post}/>
+                    </PostWrapper>
+                        <CreateNewComment id={this.props.post.id} />   
+                        {this.props.post.comments.map((comment) => {
+                            return (<Comments comments={comment} />)
+                        })}
+                </MainConteiner>
+            </MainWrapper>
         );
     }
 }

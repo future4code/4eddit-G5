@@ -10,8 +10,19 @@ export const createPost = (title, text) => async (dispatch) => {
         title,
         text
     }
-    const res = await axios.post(`https://us-central1-missao-newton.cloudfunctions.net/fourEddit/posts`, data, { headers: { auth: token } })
-    dispatch(getPosts())
+    const res = await axios.post(
+        `https://us-central1-missao-newton.cloudfunctions.net/fourEddit/posts`,
+        data, 
+        { headers: { auth: token } }
+    ).then((res) => {
+        dispatch(getPosts())
+        const message = "New post created susccessfully"
+        dispatch(changeSnackbar(message, "success"))
+    }).catch((err) => {
+        const message = "An error has occured. Please, try again."
+        dispatch(changeSnackbar(message, "error"))
+    })
+    
 }
 
 export const getPosts = () => async (dispatch) => {

@@ -6,15 +6,27 @@ import Button from "@material-ui/core/Button"
 import styled from "styled-components"
 import { routes } from "../Router"
 import { login } from "../../actions/login"
+import Header from "../../components/Header"
+
+const MainWrapper = styled.div`
+  height: 100vh;
+`
+
 
 const LoginWrapper = styled.form`
   width: 100%;
-  height: 100%;
+  height: 90%;
   gap: 10px;
   place-content: center;
   justify-items: center;
+  align-items: center;
   display: grid;
 `;
+
+const SignUpLink = styled.a`
+  text-decoration: underline;
+  :hover{cursor: pointer;}
+`
 
 class LoginPage extends Component {
   constructor(props) {
@@ -43,6 +55,9 @@ class LoginPage extends Component {
     const { email, password } = this.state;
 
     return (
+        <MainWrapper>
+          <Header
+          />
           <LoginWrapper>
             <TextField
               onChange={this.handleFieldChange}
@@ -59,12 +74,9 @@ class LoginPage extends Component {
               value={password}
             />
             <Button onClick={this.autenticateLogin} variant='flat' color='primary'>Login</Button>
-            <p>Not a user? <a onClick={this.props.goToSignUp}>Sign up</a></p>
-          
-        <Button onClick={this.props.goFeed} variant='flat' color='primary'>Feed</Button>
-        <Button onClick={this.props.goPost} variant='flat' color='primary'>Post</Button>
-
+            <p>Not a user? <SignUpLink onClick={this.props.goToSignUp}>Sign up</SignUpLink></p>
           </LoginWrapper>
+        </MainWrapper>
     );
   }
 }
