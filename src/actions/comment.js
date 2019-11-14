@@ -12,7 +12,6 @@ export const createComment = (text, id) => async (dispatch) => {
 }
 
 export const voteComment = (value, id, idComment) => async (dispatch) => {
-    console.log("tesate", value, id, idComment)
     const token = window.localStorage.getItem("token")
     const data = {
         direction: value,

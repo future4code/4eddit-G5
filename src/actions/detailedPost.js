@@ -9,10 +9,8 @@ export const getPostById = (id) => async (dispatch) => {
 			}
 		}
     ).then((res) => {
-        console.log("dados: ", res.data)
         dispatch(displayDetailedPost(res.data.post))
     }).catch((err) => {
-		console.log(err);
 	})
 };
 

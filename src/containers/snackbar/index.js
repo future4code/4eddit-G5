@@ -1,7 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
 import Router from "../Router";
-import { closeSnackbar } from "../../actions/snackbar";
 import {history} from "../App"
 import classNames from 'classnames';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
@@ -12,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import { withStyles } from '@material-ui/core/styles';
+import { closeSnackbar } from "../../actions/snackbar";
 
 
 const variantIcon = {
@@ -73,7 +73,7 @@ const MySnackbarContentWrapper = withStyles(styles1)(MySnackbarContent);
 
 
 const SnackbarComponent = (props) => {
-    
+    console.log(props.message)
     return (
         <div>
             <Router history={history} />
@@ -96,10 +96,11 @@ const SnackbarComponent = (props) => {
     );
 }
 const mapStateToProps = state => {
+    console.log(state.snackbar)
     return({
-    open: state.snackbar.state.open,
-    message: state.snackbar.state.message,
-    state: state.snackbar.state.state 
+        open: state.snackbar.open,
+        message: state.snackbar.message,
+        state: state.snackbar.state,
 })
 }
 

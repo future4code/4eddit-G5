@@ -34,7 +34,6 @@ class FeedPage extends Component {
 
     render(){
         const posts = this.props.posts.map(post => (<Post onClickGoToComments={() => this.props.goToPosts(post.id)} post={post}/>))
-        console.log(posts)
         return (
 
             <MainConteiner>

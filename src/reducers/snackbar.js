@@ -6,7 +6,6 @@ const initialState = {
 }
 
 const snackbar = (state= initialState, action) => {
-    console.log(action.type)
     switch(action.type){
         case "CHANGE_SNACKBAR":
             const newSnackbar = {
@@ -14,9 +13,14 @@ const snackbar = (state= initialState, action) => {
                 message: action.payload.message,
                 state: action.payload.state,
             }
-            return {state:newSnackbar}
+            return newSnackbar
         case "CLOSE_SNACKBAR":
-            return {state:{...state, open:false}}
+            const closeSnackbar = {
+                open: false,
+                message: state.message,
+                state: state.state,
+            }
+            return closeSnackbar
         default:
             return state
     }

@@ -21,8 +21,6 @@ function Router(props) {
         <Route path={routes.signUp} component={SignUpPage} />
         <ProtectRouter path={routes.feed} component={FeedPage} />
         <ProtectRouter path={routes.post} component={PostPage} />
-        {/* <Route path={routes.feed} component={FeedPage} />
-        <Route path={routes.post} component={PostPage} /> */}
         <Route path={routes.login} component={LoginPage} />
       </Switch>
     </ConnectedRouter>
