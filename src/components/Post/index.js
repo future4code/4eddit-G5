@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import IconButton from '@material-ui/core/IconButton'
-import ThumbsUp from '../../style/thumb_up-24px.svg'
-import ThumbsDown from '../../style/thumb_down-24px.svg'
+import ThumbUp from '@material-ui/icons/ThumbUp'
+import ThumbDown from '@material-ui/icons/ThumbDown'
 import styled from 'styled-components'
 import { vote } from '../../actions/feed'
 import { connect } from "react-redux"
@@ -60,6 +60,28 @@ class Post extends Component{
     
 
     render(){
+        
+        let colorbutton1
+        let colorbutton2
+        switch (this.props.post.userVoteDirection) {
+            case 0:
+                colorbutton1 = "secondary"
+                colorbutton2 = "secondary"
+                break;
+            case 1:
+                colorbutton1 = "primary"
+                colorbutton2 = "secondary"
+
+                break;
+            case -1:
+                colorbutton1 = "secondary"
+                colorbutton2 = "primary"
+
+                break;
+            default:
+                break;
+        }
+
         return(
             <PostWrapper>
                 <Header>{this.props.post.title} - {this.props.post.username}</Header>
@@ -68,12 +90,12 @@ class Post extends Component{
                 </section>
                 <Footer>
                     <ButtonsSection>
-                        <IconButton>
-                            <img src={(ThumbsUp)} onClick={()=> this.changeThumbs(1, this.props.post.id)} />
+                        <IconButton color={colorbutton1}>
+                            <ThumbUp  onClick={()=> this.changeThumbs(1, this.props.post.id)} />
                         </IconButton>
                         <p>{this.props.post.votesCount}</p>
-                        <IconButton>
-                            <img src={ThumbsDown} onClick={() => this.changeThumbs(-1, this.props.post.id)} />
+                        <IconButton color={colorbutton2}>
+                            <ThumbDown  onClick={() => this.changeThumbs(-1, this.props.post.id)} />
                         </IconButton>
                     </ButtonsSection>
                     <p onClick={this.props.onClickGoToComments}>{this.props.post.commentsNumber} Comments</p>

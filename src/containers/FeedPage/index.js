@@ -6,8 +6,17 @@ import { getPosts } from "../../actions/feed";
 import { push } from "connected-react-router";
 import { routes } from "../Router";
 import { getPostById } from "../../actions/detailedPost";
+import styled from "styled-components"
 
 
+const MainConteiner = styled.form`
+  width: 100vw;
+  gap: 10px;
+  place-content: center;
+  justify-items: center;
+  display: grid;
+  margin-top: 5vh;
+`;
 
 
 
@@ -25,13 +34,12 @@ class FeedPage extends Component {
 
     render(){
         const posts = this.props.posts.map(post => (<Post onClickGoToComments={() => this.props.goToPosts(post.id)} post={post}/>))
-        console.log(posts)
         return (
 
-            <div>
+            <MainConteiner>
                 <CreatePost/>
                 {posts}
-            </div>
+            </MainConteiner>
 
         );
     }
