@@ -9,6 +9,7 @@ import Header from "../../components/Header"
 
 const MainWrapper = styled.div`
   min-height: 100vh;
+  background: #758595;
 `
 
 const MainConteiner = styled.div`
@@ -80,7 +81,11 @@ class PostPage extends Component {
         const { post } = this.props
         return (
             <MainWrapper>
-                <Header logOffButton goBack />
+                <Header
+                 logOffButton 
+                 goBack
+                 userInfo username={window.localStorage.getItem("username")} 
+                />
                 <MainConteiner>
                     <PostWrapper>
                         <Post post={post}/>

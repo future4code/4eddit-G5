@@ -1,6 +1,6 @@
 const initialState = {
     posts: [],
-    post: {comments: [],}
+    post: {comments: [],},
 }
 
 const posts = (state= initialState, action) => {

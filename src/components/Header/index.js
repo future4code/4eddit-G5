@@ -40,6 +40,11 @@ const RightSectionDiv = styled.div`
 
 const LinkedP = styled.p`
     :hover{cursor: pointer};
+    color: white;
+`
+
+const StyledP = styled.p`
+    color: white;
 `
 
 
@@ -49,7 +54,7 @@ const Header = (props) => {
     const onClickToSignOff = () => {
         const { goToLogin } = props
 
-        window.localStorage.clear('token');
+        window.localStorage.clear('token', 'username');
 
         goToLogin()
     }
@@ -59,7 +64,7 @@ const Header = (props) => {
     null
 
     const userInfo = props.userInfo?
-     <p>Hello, {props.username}</p> 
+     <StyledP>Hello, {props.username}</StyledP> 
      :
     null
 

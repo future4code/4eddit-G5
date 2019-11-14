@@ -7,24 +7,31 @@ import styled from "styled-components"
 import { routes } from "../Router"
 import { requestSignUp } from "../../actions/signup"
 import Header from "../../components/Header"
+import Card from '@material-ui/core/Card'
+
 
 const MainWrapper = styled.div`
   height: 100vh;
+  background: #758595;
 `
 
-const LoginWrapper = styled.form`
+const LoginMainWrapper = styled.div`
   width: 100%;
-  height: 90%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const LoginWrapper = styled(Card)`
+  width: 20%;
+  height: 50%;
   gap: 10px;
   place-content: center;
   justify-items: center;
   display: grid;
+  border: 1px solid black;
 `;
-
-const LoginLink = styled.a`
-  text-decoration: underline;
-  :hover{cursor: pointer;}
-`
 
 class SignUpPage extends Component {
   constructor(props) {
@@ -63,30 +70,32 @@ class SignUpPage extends Component {
     return (
       <MainWrapper>
         <Header goBack />
-        <LoginWrapper>
-          <TextField
-            onChange={this.handleFieldChange}
-            name="username"
-            type="text"
-            label="Your name"
-            value={name}
-          />
-          <TextField
-            onChange={this.handleFieldChange}
-            name="email"
-            type="email"
-            label="E-mail"
-            value={email}
-          />
-          <TextField
-            onChange={this.handleFieldChange}
-            name="password"
-            type="password"
-            label="Password"
-            value={password}
-          />
-          <Button onClick={this.signUp} variant='flat' color='primary'>Signup</Button>
-        </LoginWrapper>
+        <LoginMainWrapper>
+          <LoginWrapper>
+            <TextField
+              onChange={this.handleFieldChange}
+              name="username"
+              type="text"
+              label="Your name"
+              value={name}
+            />
+            <TextField
+              onChange={this.handleFieldChange}
+              name="email"
+              type="email"
+              label="E-mail"
+              value={email}
+            />
+            <TextField
+              onChange={this.handleFieldChange}
+              name="password"
+              type="password"
+              label="Password"
+              value={password}
+            />
+            <Button onClick={this.signUp} variant='flat' color='primary'>Signup</Button>
+          </LoginWrapper>
+        </LoginMainWrapper>
       </MainWrapper>
     );
   }

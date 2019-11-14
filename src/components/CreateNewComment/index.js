@@ -4,8 +4,10 @@ import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
 import { createComment } from "../../actions/comment"
 import styled from 'styled-components'
+import Card from '@material-ui/core/Card'
 
-const MainConteiner = styled.div`
+
+const MainConteiner = styled(Card)`
   width: 70%;
   gap: 10px;
   display: grid;

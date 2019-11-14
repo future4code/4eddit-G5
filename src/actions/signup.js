@@ -8,6 +8,7 @@ export const requestSignUp = (data) => async (dispatch) => {
         "https://us-central1-missao-newton.cloudfunctions.net/fourEddit/signup",
         data
     ).then((res) => {
+        window.localStorage.setItem("username", )
         window.localStorage.setItem('token', res.data.token);
         dispatch(push(routes.feed))
         const message = "Successfully SingUp and Login"
