@@ -4,9 +4,10 @@ import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
 import { createPost } from "../actions/feed"
 import styled from "styled-components"
+import Card from '@material-ui/core/Card'
 
 
-const MainConteiner = styled.form`
+const StyledCard = styled(Card)`
   width: 70vw;
   gap: 5px;
   display: grid;
@@ -14,12 +15,12 @@ const MainConteiner = styled.form`
 `;
 
 const TitleNewPost = styled.p`
-  margin-left 5%;
+  margin-left: 5%;
   font-size: 150%;
 `;
 
 const TextFieldStyled1 = styled(TextField)`
-  margin-left 5%;
+  margin-left: 5%;
   width: 20%;
 `;
 
@@ -55,7 +56,7 @@ class CreatePost extends Component {
         const { title, text } = this.state;
 
         return (
-            <MainConteiner>
+            <StyledCard>
                 <TitleNewPost>New Post:</TitleNewPost>
                 <TextFieldStyled1
                     onChange={this.handleFieldChange}
@@ -73,7 +74,7 @@ class CreatePost extends Component {
                 />
                
                 <Button onClick={this.createPost} variant='flat' color='primary'>Create</Button>
-            </MainConteiner>
+            </StyledCard>
         );
     }
 }

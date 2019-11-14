@@ -6,7 +6,7 @@ import { createComment } from "../../actions/comment"
 import styled from 'styled-components'
 
 const MainConteiner = styled.div`
-  width: 100%;
+  width: 70%;
   gap: 10px;
   display: grid;
   border: 1px solid black;

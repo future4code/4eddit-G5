@@ -5,22 +5,23 @@ import ThumbDown from '@material-ui/icons/ThumbDown'
 import styled from 'styled-components'
 import { connect } from "react-redux"
 import { voteComment } from "../../actions/comment"
+import Card from '@material-ui/core/Card'
+import CardHeader from '@material-ui/core/CardHeader'
+import CardContent from '@material-ui/core/CardContent'
+import CardActions from '@material-ui/core/CardActions'
+import Divider from '@material-ui/core/Divider'
+import Typography from '@material-ui/core/Typography'
 
-const PostWrapper = styled.div`
+const StyledCard = styled(Card)`
     border: 1px solid black;
-    width: 70vw;
+    width: 49%;
 `
 
-const Comment = styled.p`
-  margin-left 5%;
-`;
-
-const Header = styled.header`
+const StyledCardHeader = styled(CardHeader)`
     display: flex;
     justify-content: center;
     font-size: 130%;
     align-items: center;
-    border-bottom: 1px solid black;
 `
 
 const Footer = styled.footer`
@@ -82,12 +83,14 @@ const ButtonsSection = styled.div`
      }
 
     return (
-        <PostWrapper>
-            <Header>{props.comments.username}</Header>
-            <section>
-                <Comment>{props.comments.text}</Comment>
-            </section>
-            <Footer>
+        <StyledCard>
+            <StyledCardHeader title={props.comments.username} />
+            <Divider />
+            <CardContent>
+                <Typography component="p">{props.comments.text}</Typography>
+            </CardContent>
+            <Divider />
+            <CardActions>
                 <ButtonsSection>
                     <IconButton color={colorbutton1}>
                         <ThumbUp  onClick={() => changeThumbs(1, props.post.id, props.comments.id)} />
@@ -97,8 +100,8 @@ const ButtonsSection = styled.div`
                         <ThumbDown color={colorbutton2} onClick={() => changeThumbs(-1, props.post.id, props.comments.id)} />
                     </IconButton>
                 </ButtonsSection>
-            </Footer>
-        </PostWrapper>
+            </CardActions>
+        </StyledCard>
     );
 }
 const mapStateToProps = state => ({
